@@ -5,16 +5,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table
 public class Customer {
 	@Id
 	private int customerId;
+	@NotEmpty(message="Customer firstName should not be empty")
 	private String firstName;
+	@NotEmpty(message="Customer lastName should not be empty")
 	private String lastName;
+	@NotEmpty(message="Customer mobileNumber should not be empty")
 	private String mobileNumber;
+	@Email
 	private String emailId;
+	@NotEmpty(message="Customer address should not be empty")
 	private String address;
 	@OneToOne
 	@JoinColumn(name="userId")

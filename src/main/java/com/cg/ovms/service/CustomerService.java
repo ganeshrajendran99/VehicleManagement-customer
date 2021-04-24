@@ -11,6 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.cg.ovms.entities.Customer;
+import com.cg.ovms.exception.EntityNotFoundException;
+import com.cg.ovms.exception.IdNotFoundException;
 import com.cg.ovms.repository.ICustomerRepository;
 import com.cg.ovms.repository.IVehicleRepository;
 
@@ -36,9 +38,20 @@ public class CustomerService implements ICustomerService {
 	}
 
 	@Override
-	public Customer viewCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return customer;
+	public Customer viewCustomer(Customer customer) throws EntityNotFoundException {
+		if(customerRepository.existsById(customer.getCustomerId())){
+			
+		}
+		else
+		{
+			throw new IdNotFoundException();
+		}
+		if(customerRepository.findById(customer.getCustomerId()).equals(customer)){
+		   return customer;
+		}
+		else {
+			throw new EntityNotFoundException();
+		}
 	}
 
 	@Override
